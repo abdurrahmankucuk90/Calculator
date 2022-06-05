@@ -31,6 +31,9 @@ calculator.addEventListener("click", (e) => {
         if (arr1[0] == 0 && arr1[1] == ["."]) {
           arr1.push(e.target.innerText);
           screen1.innerText = arr1.join("");
+        } else if (arr1[0] == 0 && arr1[1] == 0) {
+          arr1.pop("0");
+          screen1.innerText = arr1.join("");
         } else {
           arr1.push(e.target.innerText);
           screen1.innerText = arr1.join("");

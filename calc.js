@@ -31,16 +31,19 @@ calculator.addEventListener("click", (e) => {
         if (arr1[0] == 0 && arr1[1] == ["."]) {
           arr1.push(e.target.innerText);
           screen1.innerText = arr1.join("");
-        } else if (arr1[0] == 0 && arr1[1] == 0) {
-          arr1.pop("0");
-          screen1.innerText = arr1.join("");
         } else {
           arr1.push(e.target.innerText);
           screen1.innerText = arr1.join("");
         }
       } else if (arr1.length == 1 || arr1.length > 2) {
-        arr1.push(e.target.innerText);
-        screen1.innerText = arr1.join("");
+        if (arr1.length == 1) {
+          screen1.innerText = arr1.join("");
+        } else {
+          if (arr1[0] == 0) {
+            arr1.push(e.target.innerText);
+            screen1.innerText = arr1.join("");
+          }
+        }
       }
       // if (arr1[0] == "") {
       //   arr1.push(e.target.innerText);
@@ -108,9 +111,15 @@ calculator.addEventListener("click", (e) => {
           arr3.push(e.target.innerText);
           screen1.innerText = arr3.join("");
         }
-      } else if (arr3.length > 2) {
-        arr3.push(e.target.innerText);
-        screen1.innerText = arr3.join("");
+      } else if (arr3.length == 1 || arr3.length > 2) {
+        if (arr3.length == 1) {
+          screen1.innerText = arr3.join("");
+        } else {
+          if (arr3[0] == 0) {
+            arr3.push(e.target.innerText);
+            screen1.innerText = arr3.join("");
+          }
+        }
       }
     } //* yuzde for arr3
     else if (e.target.classList.contains("ps")) {

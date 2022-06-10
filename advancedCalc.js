@@ -40,18 +40,59 @@ calculator.addEventListener("click", (e) => {
         screen1.innerText = arr1.join("");
       }
     }
+    //!Delete icon
+    else if (e.target.classList.contains("ac")) {
+      arr1.splice(0, arr1.length);
+      arr2.splice(0, arr2.length);
+      screen1.innerText = "";
+      screen2.innerText = "";
+    }
+    //!Decimel icon
+    else if (e.target.classList.contains("dot")) {
+      if (arr1.includes(".")) {
+        screen1.innerText = arr1.join("");
+      }
+      if (arr1.length == 0) {
+        arr1.push("0");
+        arr1.push(".");
+        screen1.innerText = arr1.join("");
+      }
+    }
     //!Prosent icon
     else if (e.target.classList.contains("ps")) {
-      let d = arr1.reduce((a, b) => a + b) / 100
-      arr1.push(d.split)
+      let d = arr1.reduce((a, b) => a + b) / 100;
+      arr1.splice(0, arr1.length, d);
+      screen1.innerText = arr1.join("");
+      let a = parseFloat(arr1.join(""));
+    }
+    //!Negative icon
+    else if (e.target.classList.contains("np")) {
+      if (arr1.includes("-")) {
+        screen1.innerText = arr1.join("");
+      } else {
+        arr1.splice(0, 0, "-");
+        screen1.innerText = arr1.join("");
+      }
     }
     //!Operation icon
     else if (e.target.classList.contains("yellow")) {
-      arr2.push(e.target.innerText);
-      screen2.innerText = arr1.join("") + " " + arr2.join("") + " ";
-      a = parseInt(arr1.join(""));
-      arr1.splice(0, arr1.length);
-      screen1.innerText = "";
+      if (arr1.length == 0 && arr2.length == 0) {
+        arr1.push("0");
+        screen1.innerText = arr1.join("");
+        arr2.push(e.target.innerText);
+        screen2.innerText = arr1.join("") + " " + arr2.join("") + " ";
+        a = parseFloat(arr1.join(""));
+        arr1.splice(0, arr1.length);
+        screen1.innerText = "";
+      } else if (arr2.length > 0) {
+        arr2.splice(1, arr2.length);     
+      } else {
+        arr2.push(e.target.innerText);
+        screen2.innerText = arr1.join("") + " " + arr2.join("") + " ";
+        a = parseFloat(arr1.join(""));
+        arr1.splice(0, arr1.length);
+        screen1.innerText = "";
+      }
     }
     //!After operation entred
     else if (e.target.classList.contains("numb") && arr2[0] != "") {
@@ -60,7 +101,7 @@ calculator.addEventListener("click", (e) => {
     }
     //!First operation run
     else if (e.target.classList.contains("eq")) {
-      b += parseInt(arr1.join(""));
+      b += parseFloat(arr1.join(""));
       arr4.push(a);
       arr4.push(b);
       if (arr2[0] == "+") {
@@ -82,12 +123,35 @@ calculator.addEventListener("click", (e) => {
       screen1.innerText = "";
     }
   }
+
   //!Main else
   else {
     //!Operation icon
     if (e.target.classList.contains("yellow")) {
-      arr2.push(e.target.innerText);
-      screen2.innerText = c + " " + arr2.join("");
+      if (arr1.length == 0 && arr2.length == 0) {
+        arr1.push("0");
+        screen1.innerText = arr1.join("");
+        arr2.push(e.target.innerText);
+        screen2.innerText = c + " " + arr2.join("") + " ";
+        arr1.splice(0, arr1.length);
+        screen1.innerText = "";
+      } else if (arr2.length > 0) {
+        arr2.splice(1, arr2.length);       
+      } else {
+        arr2.push(e.target.innerText);
+        screen2.innerText = c + " " + arr2.join("") + " ";
+        arr1.splice(0, arr1.length);
+        screen1.innerText = "";
+      }
+    }
+    //!Negative icon
+    else if (e.target.classList.contains("np")) {
+      if (arr1.includes("-")) {
+        screen1.innerText = arr1.join("");
+      } else {
+        arr1.splice(0, 0, "-");
+        screen1.innerText = arr1.join("");
+      }
     }
     //!Number
     else if (e.target.classList.contains("numb")) {
@@ -95,6 +159,33 @@ calculator.addEventListener("click", (e) => {
       screen1.innerText = arr1.join("");
       if (arr1[0] == 0 && arr1[1] != ".") {
         arr1.splice(0, 1);
+        screen1.innerText = arr1.join("");
+      }
+    } else if (e.target.classList.contains("ps")) {
+      let d = arr1.reduce((a, b) => a + b) / 100;
+      arr1.splice(0, arr1.length, d);
+      screen1.innerText = arr1.join("");
+      let c = parseFloat(arr1.join(""));
+    }
+    //!Delete icon
+    else if (e.target.classList.contains("ac")) {
+      arr1.splice(0, arr1.length);
+      arr2.splice(0, arr2.length);
+      arr4.splice(0, arr4.length);
+      screen1.innerText = "";
+      screen2.innerText = "";
+      a = 0;
+      b = 0;
+      c = 0;
+    }
+    //!Decimel icon
+    else if (e.target.classList.contains("dot")) {
+      if (arr1.includes(".")) {
+        screen1.innerText = arr1.join("");
+      }
+      if (arr1.length == 0) {
+        arr1.push("0");
+        arr1.push(".");
         screen1.innerText = arr1.join("");
       }
     }
@@ -115,9 +206,10 @@ calculator.addEventListener("click", (e) => {
         screen1.innerText = arr1.join("");
       }
     }
+
     //!Continous Operation run
     else if (e.target.classList.contains("eq")) {
-      b = parseInt(arr1.join(""));
+      b = parseFloat(arr1.join(""));
       arr4.push(b);
       if (arr2[0] == "+") {
         c = arr4.reduce((a, b) => a + b);

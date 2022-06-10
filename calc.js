@@ -45,17 +45,7 @@ calculator.addEventListener("click", (e) => {
           }
         }
       }
-      // if (arr1[0] == "") {
-      //   arr1.push(e.target.innerText);
-      //   if (arr1[0] == 0 && arr1[1] != ".") {
-      //     screen1.innerText = "0";
-      //   } else if (arr1[0] == 0 && arr1[1] == ".") {
-      //     screen1.innerText = ["0", "."].join("");
-      //   }
-      // } else {
-      //   arr1.push(e.target.innerText);
-      // }
-      console.log(arr1);
+      
     } //*decimal input
     else if (e.target.classList.contains("dot")) {
       if (!arr1.includes(".")) {
